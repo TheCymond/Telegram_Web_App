@@ -13,50 +13,72 @@ function App() {
   useEffect(() => {
     tele.ready();
   });
-
-  const onAdd = (food) => {
-    const exist = cartItems.find((x) => x.id === food.id);
-    if (exist) {
-      setCartItems(
-        cartItems.map((x) =>
-          x.id === food.id ? { ...exist, quantity: exist.quantity + 1 } : x
-        )
-      );
-    } else {
-      setCartItems([...cartItems, { ...food, quantity: 1 }]);
-    }
-  };
-
-  const onRemove = (food) => {
-    const exist = cartItems.find((x) => x.id === food.id);
-    if (exist.quantity === 1) {
-      setCartItems(cartItems.filter((x) => x.id !== food.id));
-    } else {
-      setCartItems(
-        cartItems.map((x) =>
-          x.id === food.id ? { ...exist, quantity: exist.quantity - 1 } : x
-        )
-      );
-    }
-  };
-
-  const onCheckout = () => {
-    tele.MainButton.text = "Pay :)";
-    tele.MainButton.show();
-  };
-
+const profit= 70000000
   return (
-    <>
-      <h1 className="heading">Order Food</h1>
-      <Cart cartItems={cartItems} onCheckout={onCheckout}/>
-      <div className="cards__container">
-        {foods.map((food) => {
-          return (
-            <Card food={food} key={food.id} onAdd={onAdd} onRemove={onRemove} />
-          );
-        })}
-      </div>
-    </>
+    <div class="bg-slate-50">
+      <h1 className="heading">Profit Report</h1>
+      <table class="table-auto border-separate text-xl border-spacing-0 font-sans" >
+        <thead class="bg-slate-200">
+          <tr >
+            <th class="" />
+            <th class="px-2 text-center">Doanh Thu</th>
+            <th class="px-2 text-center">Chi Phí</th>
+            <th class="px-2 text-center">Lợi Nhuận</th>
+          </tr>
+        </thead>
+        <tbody>
+        <td class="font-bold italic">TỔNG QUAN</td><td/><td/>
+          <tr>
+            <td class="text-center ">Tổng</td>
+            <td class="px-2 text-right">{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td class="px-2 text-right">{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td class="px-2 text-right">{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+          </tr>
+          <tr>
+          <td class="font-bold italic">CÁC DỊCH VỤ</td><td/><td/>
+          </tr>
+          <tr>
+            <td class="text-center">Ẩm Thực</td>
+            <td class="px-2 text-right ">{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td class="px-2 text-right">{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td class="px-2 text-right">{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+          </tr>
+          <tr>
+            <td class="text-center">Tour</td>
+            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+          </tr>
+          <tr>
+            <td class="text-center">Lưu Trú</td>
+            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+          </tr>
+          <tr>
+          <td class="font-bold italic">THÀNH VIÊN</td><td/><td/>
+          </tr>
+          <tr>
+            <td class="text-center">Mẫn Trịnh</td>
+            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+          </tr>
+          <tr>
+            <td class="text-center">Liễu Lê</td>
+            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+          </tr>
+          <tr>
+            <td class="text-center">Hương Thanh</td>
+            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   );
 }
 
