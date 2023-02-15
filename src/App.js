@@ -39,42 +39,42 @@ const profit= 70000000
           </tr>
           <tr>
             <td class="text-center">Ẩm Thực</td>
-            <td class="px-2 text-right ">{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td class="px-2 text-right">{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
             <td class="px-2 text-right">{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
             <td class="px-2 text-right">{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
           </tr>
           <tr>
             <td class="text-center">Tour</td>
-            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
-            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
-            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td class="px-2 text-right">{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td class="px-2 text-right">{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td class="px-2 text-right">{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
           </tr>
           <tr>
             <td class="text-center">Lưu Trú</td>
-            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
-            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
-            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td class="px-2 text-right">{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td class="px-2 text-right">{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td class="px-2 text-right">{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
           </tr>
           <tr>
           <td class="font-bold italic">THÀNH VIÊN</td><td/><td/>
           </tr>
           <tr>
             <td class="text-center">Mẫn Trịnh</td>
-            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
-            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
-            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td class="px-2 text-right">{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td class="px-2 text-right">{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td class="px-2 text-right">{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
           </tr>
           <tr>
             <td class="text-center">Liễu Lê</td>
-            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
-            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
-            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td class="px-2 text-right">{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td class="px-2 text-right">{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td class="px-2 text-right">{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
           </tr>
           <tr>
             <td class="text-center">Hương Thanh</td>
-            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
-            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
-            <td >{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td class="px-2 text-right">{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td class="px-2 text-right">{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+            <td class="px-2 text-right">{profit.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
           </tr>
         </tbody>
       </table>
