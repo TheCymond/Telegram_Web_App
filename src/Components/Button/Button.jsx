@@ -1,14 +1,9 @@
 import React from "react";
-import "./Button.css";
 
-function Button({ type, title, disable, onClick }) {
+function Button({title, disable, onClick }) {
   return (
     <button
-      className={`btn ${
-        (type === "add" && "add") ||
-        (type === "remove" && "remove") ||
-        (type === "checkout" && "checkout")
-      }`}
+      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded"
       disabled={disable}
       onClick={onClick}
     >
