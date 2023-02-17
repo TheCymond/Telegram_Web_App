@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import { getInvoice } from "../../db/invoice";
 import UpdateButton from "../Button/Button";
 
 export function EditInvoice() {
-  const [invoices, setInvoices] = useState([
+  const [invoice, setInvoice] = useState([
     {
       "id": "000000000000000000",
       "guestName": "",
@@ -12,18 +13,18 @@ export function EditInvoice() {
     }
   ])
 
-  useEffect(() => {
-  }, []);
-
   const { invoiceId } = useParams()
 
+  useEffect(() => {
+    getInvoice(invoiceId).then(data => setInvoice(data))
+  }, []);
 
   return (
     <div class="bg-slate-50">
       <div class="py-2 px-2">
-        <UpdateButton title="Save" disable={false} onClick={() => {}} />
+        <UpdateButton title="Save" disable={false} onClick={() => { }} />
       </div>
-      <div>Editing invoice {invoiceId}</div>
+      <div>Editing invoice {invoiceId} of guest {invoice.guestName}</div>
       <Link to=".." relative="path" >Back</Link>
     </div >
   );
