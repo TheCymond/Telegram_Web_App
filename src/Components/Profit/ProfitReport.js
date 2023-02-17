@@ -33,7 +33,6 @@ export function ProfitReport() {
 
   return (
     <div class="bg-slate-50">
-      <h1 class="font-sans text-3xl text-center font-bold py-4 pb-9 text-green-900">Sample Table Report</h1>
       <div class="py-2 px-2">
         <UpdateButton title="Update" disable={false} onClick={() => {
           syncReport().then(data => setReport(data))

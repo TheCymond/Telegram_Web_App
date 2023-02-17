@@ -3,7 +3,7 @@ const requestOptions = {
 
 }
 
-const getData = () => {
+export const getData = () => {
   console.info("Fetching report from backend")
   return fetch('https://vom-assistant.hopto.org/api/profit/report-this-month', requestOptions)
     .then(response => response.json())
