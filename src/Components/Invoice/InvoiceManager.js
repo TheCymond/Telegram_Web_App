@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import UpdateButton from "../Button/Button";
 import listLatestInvoices from "../../db/invoice";
+import { Link } from "react-router-dom";
 
 export function InvoiceManager() {
   const [invoices, setInvoices] = useState([
@@ -8,6 +9,7 @@ export function InvoiceManager() {
       "id": "000000000000000000",
       "guestName": "",
       "issuer": "",
+      "issuerId":"",
       "subTotal": 0
     }
   ])
@@ -40,6 +42,7 @@ export function InvoiceManager() {
                 <td class="px-2 text-right font-mono">{inv.guestName}</td>
                 <td class="px-2 text-right font-mono">{inv.issuer}</td>
                 <td class="px-2 text-right font-mono">{inv.subTotal.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
+                <td class="px-2 text-right font-mono"><Link to={inv.id}>Edit</Link></td> 
               </tr>
             )
           })}
