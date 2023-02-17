@@ -20,9 +20,7 @@ function App() {
       </div>
       <Routes>
         <Route path="profit" element={<ProfitReport />} />
-        <Route path="invoice" element={<InvoiceManager />}>
-          
-        </Route>
+        <Route path="invoice" element={<InvoiceManager />}/>
         <Route path="invoice/:invoiceId" element={<EditInvoice />} />
       </Routes>
     </Router>
