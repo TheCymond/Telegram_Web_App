@@ -4,7 +4,7 @@ const requestOptions = {
 
 const listLatestInvoices = () => {
   console.info("Fetching report from backend")
-  return fetch('https://vom-assistant.hopto.org/api/invoice/list?max=7', requestOptions)
+  return fetch('https://vom-assistant.hopto.org/api/invoice/list?max=15', requestOptions)
     .then(response => response.json())
 }
 
