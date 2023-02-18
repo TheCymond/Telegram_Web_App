@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getInvoice } from "../../db/invoice";
+import { EditItem } from "./EditItem";
 import UpdateButton from "../Button/Button";
 
 export function EditInvoice() {
@@ -28,14 +29,23 @@ export function EditInvoice() {
     getInvoice(invoiceId).then(data => setInvoice(data))
   }, []);
 
+  const onItemSave = (item) => {
+    console.info("Item %s is updated", item.id)
+    const nItems = invoice.items.map((i) => i.id == item.id ? item : i)
+    console.log(nItems)
+    setInvoice({
+      ...invoice,
+      items: nItems
+    })
+    console.log(invoice)
+  }
+
   return (
     <div class="bg-slate-50">
       <div class="py-2 px-2">
         <UpdateButton title="Save" disable={false} onClick={() => { }} />
+        <Link to=".." relative="path" >Back</Link>
       </div>
-      <div>Editing invoice {invoiceId} of guest {invoice.guestName}</div>
-      <Link to=".." relative="path" >Back</Link>
-
       <form class="flex flex-wrap mx-1">
         {/** First Column */}
         <div class="w-full md:w-1/2 mx-1 mb-6">
@@ -51,7 +61,7 @@ export function EditInvoice() {
               <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
                 Last Name
               </label>
-              <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Doe" />
+              <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Doe" value={invoice.guestName} />
             </div>
           </div>
           <div class="flex flex-wrap -mx-3 mb-6">
@@ -59,14 +69,14 @@ export function EditInvoice() {
               <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                 Check In
               </label>
-              <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Jane" value={invoice.checkInDate} />
+              <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-check-in" type="text" placeholder="Jane" value={invoice.checkInDate} />
               <p class="text-red-500 text-xs italic">Please fill out this field.</p>
             </div>
             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                 Check Out
               </label>
-              <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Jane" value={invoice.checkOutDate} />
+              <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-check-out" type="text" placeholder="Jane" value={invoice.checkOutDate} />
               <p class="text-red-500 text-xs italic">Please fill out this field.</p>
             </div>
           </div>
@@ -119,16 +129,20 @@ export function EditInvoice() {
                     <td class="border px-4 py-2">{item.itemName}</td>
                     <td class="border px-4 py-2 text-right">{item.unitPrice.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
                     <td class="border px-4 py-2 text-right">{item.quantity}</td>
-                    <td class="border px-4 py-2 text-right">{item.amount.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
-                    <td class="border px-4 py-2">+</td>
-                    <td class="border px-4 py-2">-</td>
+                    <td class="border px-4 py-2 text-right">{item.amount}</td>
+                    <td class="border px-4 py-2">{<EditItem eItem={item} onSave={onItemSave} />}</td>
                   </tr>
                 )
               })}
             </tbody>
           </table>
+          <div class="py-2 px-2">
+            <UpdateButton title="+ Item" disable={false} onClick={() => { }} />
+          </div>
         </div>
       </form>
+
+
     </div >
   );
 }

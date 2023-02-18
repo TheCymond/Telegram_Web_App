@@ -3,6 +3,7 @@ import UpdateButton from "../Button/Button";
 import listLatestInvoices from "../../db/invoice";
 import { Link } from "react-router-dom";
 
+
 export function InvoiceManager() {
   const [invoices, setInvoices] = useState([
     {
