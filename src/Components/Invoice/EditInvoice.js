@@ -13,6 +13,7 @@ export function EditInvoice() {
       "id": "000000000000000000",
       "guestName": "",
       "issuer": "",
+      "issuerId": "",
       "subTotal": 0,
       "items": [
         {
@@ -62,19 +63,26 @@ export function EditInvoice() {
   }
 
   const onIssuerChange = (e) => {
+    console.log("Selected: %s", e.target.value)
+
+    let iss = issuers.find((i) => i.issuerId == e.target.value)
     const inv = {
       ...invoice,
       issuerId: e.target.value,
-      // issuer: issuers[e.target.key].issuer
+      issuer: iss != null ? iss.issuer : invoice.issuer
     }
+
     setInvoice(inv)
-    console.log("Choosen issuer: %s chatId: %s",invoice.issuer, invoice.issuerId)
   }
 
+  const handleSaveInvoice = () => {
+    console.info("Saving invoice")
+    console.log(invoice)
+  }
   return (
     <div class="bg-slate-50">
       <div class="py-2 px-2">
-        <UpdateButton title="Save" disable={false} onClick={() => { }} />
+        <UpdateButton title="Save" disable={false} onClick={handleSaveInvoice} />
         <Link to=".." relative="path" >Back</Link>
       </div>
       <form class="flex flex-wrap mx-1">
@@ -154,7 +162,7 @@ export function EditInvoice() {
                 {
                   issuers.map((iss, i) => {
                     return (
-                      <option key={i} value={iss.issuerId}>
+                      <option key={iss.issuerId} value={iss.issuerId}>
                         {iss.issuer}
                       </option>
                     )
@@ -193,7 +201,7 @@ export function EditInvoice() {
             <tbody>
               {invoice.items.map((item) => {
                 return (
-                  <tr class="bg-gray-100">
+                  <tr class="bg-gray-100" key={item.id}>
                     <td class="border px-4 py-2">{item.itemName}</td>
                     <td class="border px-4 py-2 text-right">{item.unitPrice.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
                     <td class="border px-4 py-2 text-right">{item.quantity}</td>

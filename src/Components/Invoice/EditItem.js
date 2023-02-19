@@ -16,7 +16,6 @@ export function EditItem({ eItem, onSave }) {
 
 
   useEffect(() => {
-    console.info("Edit item " + eItem.id)
     setItem(eItem)
   }, []);
 
