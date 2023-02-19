@@ -28,18 +28,16 @@ export function EditItem({ eItem, onSave }) {
 
   const onValueChange = (e) => {
     console.info("Value change" + e.target.value + " fieldid" + e.target.id)
-    setItem({
-      ...item,
-      [e.target.id]: e.target.value
-    })
-  }
 
-  const onNumberInputChange = (e) => {
-    console.info("Value change" + e.target.value + " fieldid" + e.target.id)
-    setItem({
+    const nexItem = {
       ...item,
-      [e.target.id]: e.target.value
-    })
+      [e.target.id]: e.target.value,
+    }
+    const nexxItem = {
+      ...nexItem,
+      amount: nexItem.quantity*nexItem.unitPrice
+    }
+    setItem(nexxItem)
   }
 
   const saveItem = (e) => {
@@ -95,7 +93,7 @@ export function EditItem({ eItem, onSave }) {
                 step={5000}
                 required={true}
                 value={item.unitPrice}
-                onChange={onNumberInputChange}
+                onChange={onValueChange}
               />
             </div>
             <div>
@@ -111,7 +109,7 @@ export function EditItem({ eItem, onSave }) {
                 placeholder="1"
                 required={true}
                 value={item.quantity}
-                onChange={onNumberInputChange}
+                onChange={onValueChange}
               />
             </div>
             <div>
@@ -125,7 +123,7 @@ export function EditItem({ eItem, onSave }) {
                 id="amount"
                 placeholder="1"
                 required={true}
-                value={item.quantity * item.unitPrice}
+                value={item.amount}
                 readOnly={true}
               />
             </div>

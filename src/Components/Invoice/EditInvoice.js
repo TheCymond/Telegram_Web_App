@@ -32,10 +32,17 @@ export function EditInvoice() {
   const onItemSave = (item) => {
     console.info("Item %s is updated", item.id)
     const nItems = invoice.items.map((i) => i.id == item.id ? item : i)
+
+    var total = 0;
+    for (var i in nItems) {
+      total += nItems[i].amount;
+    }
     console.log(nItems)
+
     setInvoice({
       ...invoice,
-      items: nItems
+      items: nItems,
+      subTotal: total
     })
     console.log(invoice)
   }
@@ -129,11 +136,18 @@ export function EditInvoice() {
                     <td class="border px-4 py-2">{item.itemName}</td>
                     <td class="border px-4 py-2 text-right">{item.unitPrice.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
                     <td class="border px-4 py-2 text-right">{item.quantity}</td>
-                    <td class="border px-4 py-2 text-right">{item.amount}</td>
+                    <td class="border px-4 py-2 text-right">{item.unitPrice * item.quantity}</td>
                     <td class="border px-4 py-2">{<EditItem eItem={item} onSave={onItemSave} />}</td>
                   </tr>
                 )
               })}
+              <tr class="bg-gray-100 font-bold">
+                <td class="border px-4 py-2">Sub Total</td>
+                <td class="border px-4 py-2 text-right"></td>
+                <td class="border px-4 py-2 text-right"></td>
+                <td class="border px-4 py-2 text-right">{invoice.subTotal}</td>
+                <td class="border px-4 py-2 text-right"></td>
+              </tr>
             </tbody>
           </table>
           <div class="py-2 px-2">
