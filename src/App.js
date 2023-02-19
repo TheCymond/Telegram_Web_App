@@ -16,7 +16,8 @@ function App() {
   return (
     <div>
       <Helmet>
-        <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
+        <script src="../flowbite/dist/flowbite.min.js"></script>
+        <script src="../flowbite/dist/datepicker.js"></script>
       </Helmet>
 
       <Router>

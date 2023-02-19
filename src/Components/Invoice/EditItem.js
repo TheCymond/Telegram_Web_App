@@ -123,7 +123,7 @@ export function EditItem({ eItem, onSave }) {
                 id="amount"
                 placeholder="1"
                 required={true}
-                value={item.amount}
+                value={item.amount.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}
                 readOnly={true}
               />
             </div>
