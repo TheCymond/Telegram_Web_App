@@ -5,6 +5,7 @@ import { EditItem } from "./EditItem";
 import UpdateButton from "../Button/Button";
 import { TextInput, Label, Select } from 'flowbite-react';
 import "flowbite";
+import { getIssuers } from "../../db/invoice";
 
 export function EditInvoice() {
   const [invoice, setInvoice] = useState(
@@ -24,6 +25,8 @@ export function EditInvoice() {
       ]
     }
   )
+
+  const issuers = getIssuers()
 
   const { invoiceId } = useParams()
 
@@ -50,6 +53,24 @@ export function EditInvoice() {
     console.log(invoice)
   }
 
+  const onDataChange = (e) => {
+    const inv = {
+      ...invoice,
+      [e.target.id]: e.target.value
+    }
+    setInvoice(inv)
+  }
+
+  const onIssuerChange = (e) => {
+    const inv = {
+      ...invoice,
+      issuerId: e.target.value,
+      // issuer: issuers[e.target.key].issuer
+    }
+    setInvoice(inv)
+    console.log("Choosen issuer: %s chatId: %s",invoice.issuer, invoice.issuerId)
+  }
+
   return (
     <div class="bg-slate-50">
       <div class="py-2 px-2">
@@ -72,7 +93,7 @@ export function EditInvoice() {
                 placeholder="John Smith"
                 required={true}
                 value={invoice.guestName}
-                className="bg-slate-400"
+                onChange={onDataChange}
               />
               <p class="text-red-500 text-xs italic">Please fill out this field.</p>
             </div>
@@ -93,6 +114,7 @@ export function EditInvoice() {
                 value={invoice.checkInDate}
                 readOnly={false}
                 type="date"
+                onChange={onDataChange}
               />
               <p class="text-red-500 text-xs italic">Please fill out this field.</p>
             </div>
@@ -126,16 +148,18 @@ export function EditInvoice() {
               <Select
                 id="issuer"
                 required={true}
+                onChange={onIssuerChange}
+                value={invoice.issuerId}
               >
-                <option>
-                  Liễu Lê
-                </option>
-                <option>
-                  Mẫn Trịnh
-                </option>
-                <option>
-                  Hương Thanh
-                </option>
+                {
+                  issuers.map((iss, i) => {
+                    return (
+                      <option key={i} value={iss.issuerId}>
+                        {iss.issuer}
+                      </option>
+                    )
+                  })
+                }
               </Select>
             </div>
             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">

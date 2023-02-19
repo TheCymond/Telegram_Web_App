@@ -15,3 +15,9 @@ export function getInvoice(invoiceId) {
   return fetch(`https://vom-assistant.hopto.org/api/invoice/${invoiceId}`, requestOptions)
     .then(response => response.json())
 }
+
+export function getIssuers() {
+  return [{ issuerId: "1351151927", issuer: "Mẫn Trịnh" },
+  { issuerId: "5114683375", issuer: "Liễu Lê" },
+  { issuerId: "6159537383", issuer: "Hương Thanh" }]
+}

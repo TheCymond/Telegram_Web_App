@@ -12,6 +12,8 @@ export function EditItem({ eItem, onSave }) {
     }
   )
 
+  const [rememberUnitPrice, setRememberUnitPrice] = useState(true)
+
 
   useEffect(() => {
     console.info("Edit item " + eItem.id)
@@ -35,9 +37,14 @@ export function EditItem({ eItem, onSave }) {
     }
     const nexxItem = {
       ...nexItem,
-      amount: nexItem.quantity*nexItem.unitPrice
+      amount: nexItem.quantity * nexItem.unitPrice
     }
     setItem(nexxItem)
+  }
+
+  const onRemberForLaterUseChange = (e) => {
+    console.info("Remember changed to %s", e.target.checked)
+    setRememberUnitPrice(e.target.checked)
   }
 
   const saveItem = (e) => {
@@ -129,7 +136,7 @@ export function EditItem({ eItem, onSave }) {
             </div>
             <div className="flex justify-between">
               <div className="flex items-center gap-2">
-                <Checkbox id="remember" checked={true} />
+                <Checkbox id="remember" checked={rememberUnitPrice} onChange={onRemberForLaterUseChange} />
                 <Label htmlFor="remember">
                   Remember the unit price for later use
                 </Label>
