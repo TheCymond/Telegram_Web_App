@@ -17,7 +17,7 @@ export function EditItem({ eItem, onSave, onDelete }) {
 
   useEffect(() => {
     setItem(eItem)
-  }, []);
+  }, [eItem]);
 
   const [isShown, setShow] = useState(false)
   const onClick = () => {
@@ -63,7 +63,7 @@ export function EditItem({ eItem, onSave, onDelete }) {
     })
     onDelete(item)
   }
-  
+
 
   return (
     <div>
@@ -120,15 +120,15 @@ export function EditItem({ eItem, onSave, onDelete }) {
                 />
               </div>
               <div className="flex">
-              <TextInput
-                id="quantity"
-                type="number"
-                placeholder="1"
-                required={true}
-                value={item.quantity}
-                onChange={onValueChange}
-              /><Button className="ml-3 bg-slate-200 text-black">+</Button>
-              <Button className="ml-3 bg-slate-200 text-black">-</Button>
+                <TextInput
+                  id="quantity"
+                  type="number"
+                  placeholder="1"
+                  required={true}
+                  value={item.quantity}
+                  onChange={onValueChange}
+                /><Button className="ml-3 bg-slate-200 text-black">+</Button>
+                <Button className="ml-3 bg-slate-200 text-black">-</Button>
               </div>
             </div>
             <div>

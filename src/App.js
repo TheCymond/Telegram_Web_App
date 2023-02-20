@@ -13,6 +13,8 @@ function App() {
   useEffect(() => {
     tele.ready();
   }, []);
+
+  
   return (
     <div>
       <Helmet>

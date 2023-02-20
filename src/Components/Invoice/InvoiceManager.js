@@ -43,7 +43,9 @@ export function InvoiceManager() {
                 <td class="px-2 text-right font-mono">{inv.guestName}</td>
                 <td class="px-2 text-right font-mono">{inv.issuer}</td>
                 <td class="px-2 text-right font-mono">{inv.subTotal.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
-                <td class="px-2 text-right font-mono"><Link to={inv.id}>Edit</Link></td> 
+                <td class="px-2 text-right font-mono">
+                  <Link to={inv.id}>Edit</Link>
+                </td> 
               </tr>
             )
           })}

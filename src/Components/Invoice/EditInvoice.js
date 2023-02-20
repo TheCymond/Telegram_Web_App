@@ -8,7 +8,7 @@ import "flowbite";
 import { getIssuers } from "../../db/invoice";
 import { AddItem } from "./AddItem";
 
-export function EditInvoice() {
+export const EditInvoice = () => {
   const [invoice, setInvoice] = useState(
     {
       "id": "000000000000000000",
@@ -29,12 +29,12 @@ export function EditInvoice() {
   )
 
   const issuers = getIssuers()
-
   const { invoiceId } = useParams()
 
   useEffect(() => {
+    console.info("Eding invoice %s", invoiceId)
     getInvoice(invoiceId).then(data => setInvoice(data))
-  }, []);
+  }, [invoiceId]);
 
   const handleSaveItem = (item) => {
     console.info("Item %s is updated", item.id)
