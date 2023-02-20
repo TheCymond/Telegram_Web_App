@@ -1,63 +1,39 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import "./App.css";
-import Card from "./Components/Card/Card";
-import Cart from "./Components/Cart/Cart";
-const { getData } = require("./db/db");
-const foods = getData();
+import { ProfitReport } from "./Components/Profit/ProfitReport"
+import { InvoiceManager } from "./Components/Invoice/InvoiceManager"
+import { EditInvoice } from "./Components/Invoice/EditInvoice"
+import { BrowserRouter as Router, Link, Route, Routes, Outlet } from "react-router-dom"
+import { Helmet } from "react-helmet"
 
 const tele = window.Telegram.WebApp;
 
 function App() {
-  const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
     tele.ready();
-  });
-
-  const onAdd = (food) => {
-    const exist = cartItems.find((x) => x.id === food.id);
-    if (exist) {
-      setCartItems(
-        cartItems.map((x) =>
-          x.id === food.id ? { ...exist, quantity: exist.quantity + 1 } : x
-        )
-      );
-    } else {
-      setCartItems([...cartItems, { ...food, quantity: 1 }]);
-    }
-  };
-
-  const onRemove = (food) => {
-    const exist = cartItems.find((x) => x.id === food.id);
-    if (exist.quantity === 1) {
-      setCartItems(cartItems.filter((x) => x.id !== food.id));
-    } else {
-      setCartItems(
-        cartItems.map((x) =>
-          x.id === food.id ? { ...exist, quantity: exist.quantity - 1 } : x
-        )
-      );
-    }
-  };
-
-  const onCheckout = () => {
-    tele.MainButton.text = "Pay :)";
-    tele.MainButton.show();
-  };
-
+  }, []);
   return (
-    <>
-      <h1 className="heading">Order Food</h1>
-      <Cart cartItems={cartItems} onCheckout={onCheckout}/>
-      <div className="cards__container">
-        {foods.map((food) => {
-          return (
-            <Card food={food} key={food.id} onAdd={onAdd} onRemove={onRemove} />
-          );
-        })}
-      </div>
-    </>
+    <div>
+      <Helmet>
+        <script src="../flowbite/dist/flowbite.min.js"></script>
+        <script src="../flowbite/dist/datepicker.js"></script>
+      </Helmet>
+
+      <Router>
+        <div class="my-2 mx-2">
+          <Link to="profit" class="px-3 py-2 bg-gray-200 text-amber-900 text-sm font-sans ">Profit</Link>
+          <Link to="invoice" class="px-3 py-2 bg-gray-200 text-amber-900 text-sm font-sans ">Invoice</Link>
+        </div>
+        <Routes>
+          <Route path="profit" element={<ProfitReport />} />
+          <Route path="invoice" element={<InvoiceManager />} />
+          <Route path="invoice/:invoiceId" element={<EditInvoice />} />
+        </Routes>
+
+      </Router>
+    </div>
   );
 }
 
-export default App;
+export default App
