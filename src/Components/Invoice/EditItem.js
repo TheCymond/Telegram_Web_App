@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Modal, TextInput, Label, Checkbox, Button } from 'flowbite-react';
 
-export function EditItem({ eItem, onSave }) {
+export function EditItem({ eItem, onSave, onDelete }) {
   const [item, setItem] = useState(
     {
       "id": "",
@@ -54,6 +54,16 @@ export function EditItem({ eItem, onSave }) {
     })
     onSave(item)
   }
+
+  const deleteItem = (e) => {
+    setShow(false)
+    setItem({
+      ...item,
+      amount: item.quantity * item.unitPrice
+    })
+    onDelete(item)
+  }
+  
 
   return (
     <div>
@@ -109,6 +119,7 @@ export function EditItem({ eItem, onSave }) {
                   value="Quantity"
                 />
               </div>
+              <div className="flex">
               <TextInput
                 id="quantity"
                 type="number"
@@ -116,7 +127,9 @@ export function EditItem({ eItem, onSave }) {
                 required={true}
                 value={item.quantity}
                 onChange={onValueChange}
-              />
+              /><Button className="ml-3 bg-slate-200 text-black">+</Button>
+              <Button className="ml-3 bg-slate-200 text-black">-</Button>
+              </div>
             </div>
             <div>
               <div className="mb-2 block">
@@ -141,9 +154,12 @@ export function EditItem({ eItem, onSave }) {
                 </Label>
               </div>
             </div>
-            <div className="w-full">
-              <Button onClick={saveItem}>
+            <div className="w-full flex">
+              <Button onClick={saveItem} className="mx-2">
                 Save
+              </Button>
+              <Button onClick={deleteItem} className="mx-2">
+                Delete
               </Button>
             </div>
           </div>

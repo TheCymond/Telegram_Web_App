@@ -36,7 +36,7 @@ export function EditInvoice() {
     getInvoice(invoiceId).then(data => setInvoice(data))
   }, []);
 
-  const onItemSave = (item) => {
+  const handleSaveItem = (item) => {
     console.info("Item %s is updated", item.id)
     const nItems = invoice.items.map((i) => i.id == item.id ? item : i)
 
@@ -52,8 +52,21 @@ export function EditInvoice() {
     }
 
     setInvoice(inv)
-    console.log(invoice)
   }
+
+  const handleDeleteItem = (item) => {
+    console.info("Item %s is deleted", item.id)
+    const nItems = invoice.items.filter((it)=>it.id != item.id)
+    let ta = nItems.map(({ amount }) => amount).reduce((a1, a2) => a1 + a2, 0)
+    const inv = {
+      ...invoice,
+      items: nItems,
+      subTotal: ta
+    }
+
+    setInvoice(inv)
+  }
+  
 
   const onDataChange = (e) => {
     const inv = {
@@ -230,7 +243,7 @@ export function EditInvoice() {
                     <td class="border px-4 py-2 text-right">{item.unitPrice.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
                     <td class="border px-4 py-2 text-right">{item.quantity}</td>
                     <td class="border px-4 py-2 text-right">{item.amount.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
-                    <td class="border px-4 py-2">{<EditItem eItem={item} onSave={onItemSave} />}</td>
+                    <td class="border px-4 py-2">{<EditItem eItem={item} onSave={handleSaveItem} onDelete={handleDeleteItem} />}</td>
                   </tr>
                 )
               })}
