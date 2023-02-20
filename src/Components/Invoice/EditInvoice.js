@@ -6,6 +6,7 @@ import UpdateButton from "../Button/Button";
 import { TextInput, Label, Select } from 'flowbite-react';
 import "flowbite";
 import { getIssuers } from "../../db/invoice";
+import { AddItem } from "./AddItem";
 
 export function EditInvoice() {
   const [invoice, setInvoice] = useState(
@@ -79,6 +80,29 @@ export function EditInvoice() {
     console.info("Saving invoice")
     console.log(invoice)
   }
+
+  const handleAddItem = (addedItem) => {
+    console.log("Added an item into invoice")
+    console.log(addedItem)
+    let items = [
+      ...invoice.items,
+      {
+        id: addedItem.id,
+        itemName: addedItem.name,
+        unitPrice: addedItem.price,
+        quantity: 1,
+        amount: addedItem.price
+      }
+    ]
+    let ta = items.map(({ amount }) => amount).reduce((a1, a2) => a1 + a2, 0)
+    const inv = {
+      ...invoice,
+      items: items,
+      subTotal: ta
+    }
+    setInvoice(inv)
+  }
+
   return (
     <div class="bg-slate-50">
       <div class="py-2 px-2">
@@ -220,7 +244,7 @@ export function EditInvoice() {
             </tbody>
           </table>
           <div class="py-2 px-2">
-            <UpdateButton title="+ Item" disable={false} onClick={() => { }} />
+            <AddItem fncAddItem={handleAddItem}></AddItem>
           </div>
         </div>
       </form>
