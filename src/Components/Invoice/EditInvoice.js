@@ -38,7 +38,7 @@ export function EditInvoice() {
 
   const handleSaveItem = (item) => {
     console.info("Item %s is updated", item.id)
-    const nItems = invoice.items.map((i) => i.id == item.id ? item : i)
+    const nItems = invoice.items.map((i) => i.id === item.id ? item : i)
 
     var total = 0;
     for (var i in nItems) {
@@ -56,7 +56,7 @@ export function EditInvoice() {
 
   const handleDeleteItem = (item) => {
     console.info("Item %s is deleted", item.id)
-    const nItems = invoice.items.filter((it)=>it.id != item.id)
+    const nItems = invoice.items.filter((it) => it.id !== item.id)
     let ta = nItems.map(({ amount }) => amount).reduce((a1, a2) => a1 + a2, 0)
     const inv = {
       ...invoice,
@@ -66,7 +66,7 @@ export function EditInvoice() {
 
     setInvoice(inv)
   }
-  
+
 
   const onDataChange = (e) => {
     const inv = {
@@ -79,7 +79,7 @@ export function EditInvoice() {
   const onIssuerChange = (e) => {
     console.log("Selected: %s", e.target.value)
 
-    let iss = issuers.find((i) => i.issuerId == e.target.value)
+    let iss = issuers.find((i) => i.issuerId === e.target.value)
     const inv = {
       ...invoice,
       issuerId: e.target.value,

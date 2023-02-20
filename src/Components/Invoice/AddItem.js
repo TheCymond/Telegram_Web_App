@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Modal, ListGroup, Button } from 'flowbite-react';
 import { getItemList } from "../../db/invoice";
 
-export function AddItem({fncAddItem}) {
+export function AddItem({ fncAddItem }) {
 
   const [isShown, setShow] = useState(false)
   const onClick = () => {
@@ -20,7 +20,7 @@ export function AddItem({fncAddItem}) {
   const handleItemSelection = (e) => {
     console.log(e)
     console.info("Selected Item: %s ", e.target.value)
-    let selectedItem = items.find((i)=>i.id==e.target.value)
+    let selectedItem = items.find((i) => i.id === e.target.value)
     console.log(selectedItem)
     fncAddItem(selectedItem)
     onClose()
@@ -40,7 +40,7 @@ export function AddItem({fncAddItem}) {
         <Modal.Header />
         <Modal.Body>
           <div className="w-11/12">
-          <ListGroup>
+            <ListGroup>
               {
                 items.map((room) => {
                   return (

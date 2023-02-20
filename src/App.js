@@ -3,7 +3,7 @@ import "./App.css";
 import { ProfitReport } from "./Components/Profit/ProfitReport"
 import { InvoiceManager } from "./Components/Invoice/InvoiceManager"
 import { EditInvoice } from "./Components/Invoice/EditInvoice"
-import { BrowserRouter as Router, Link, Route, Routes, Outlet } from "react-router-dom"
+import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom"
 import { Helmet } from "react-helmet"
 
 const tele = window.Telegram.WebApp;
