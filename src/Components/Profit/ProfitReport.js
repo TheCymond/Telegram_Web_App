@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import UpdateButton from "../Button/Button";
-import syncReport from "../../db/db";
+import { getProfitReportThisMonth } from "../../db/profit";
 
 export function ProfitReport() {
   const [report, setReport] = useState({
@@ -26,7 +26,7 @@ export function ProfitReport() {
   })
 
   useEffect(() => {
-    syncReport().then(data => setReport(data))
+    getProfitReportThisMonth().then(data => setReport(data))
   }, []);
 
 
@@ -35,7 +35,7 @@ export function ProfitReport() {
     <div class="bg-slate-50">
       <div class="py-2 px-2">
         <UpdateButton title="Update" disable={false} onClick={() => {
-          syncReport().then(data => setReport(data))
+          getProfitReportThisMonth().then(data => setReport(data))
         }} />
       </div>
 
