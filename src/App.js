@@ -19,7 +19,7 @@ function App() {
     <div>
       <Helmet>
         <script src="../flowbite/dist/flowbite.min.js"></script>
-        <script src="../flowbite/dist/datepicker.js"></script>
+        <script src="../flowbite/dist/datepicker.min.js"></script>
       </Helmet>
 
       <Router>
