@@ -56,7 +56,7 @@ export function InvoiceManager() {
                   {inv.issuer}
                 </Table.Cell>
                 <Table.Cell>
-                  {inv.subTotal}
+                  {inv.subTotal.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}
                 </Table.Cell>
                 <Table.Cell>
                   <Link to={inv.id} className="font-medium text-blue-600 hover:underline dark:text-blue-500">Edit</Link>
