@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import UpdateButton from "../Button/Button";
 import listLatestInvoices from "../../db/invoice";
 import { Link } from "react-router-dom";
+import { Table } from "flowbite-react";
 
 
 export function InvoiceManager() {
@@ -10,7 +11,7 @@ export function InvoiceManager() {
       "id": "000000000000000000",
       "guestName": "",
       "issuer": "",
-      "issuerId":"",
+      "issuerId": "",
       "subTotal": 0
     }
   ])
@@ -22,35 +23,49 @@ export function InvoiceManager() {
 
 
   return (
-    <div class="bg-slate-50">
+    <div>
       <div class="py-2 px-2">
         <UpdateButton title="+ Add" disable={false} onClick={() => {
         }} />
       </div>
-
-      <table class="table-auto border-separate text-xl border-spacing-0 font-sans px-2 w-11/12" >
-        <thead class="bg-slate-200">
-          <tr class="text-xs font-semibold">
-            <th class="px-2 pl-4 text-right text-green-900">Guest Name</th>
-            <th class="px-2 text-center text-green-900">Issuer</th>
-            <th class="px-2 text-center text-green-900">Grand Amount</th>
-          </tr>
-        </thead>
-        <tbody>
+      <Table hoverable={true}>
+        <Table.Head>
+          <Table.HeadCell>
+            Guest Name
+          </Table.HeadCell>
+          <Table.HeadCell>
+            Issuer
+          </Table.HeadCell>
+          <Table.HeadCell>
+            Grand Amount
+          </Table.HeadCell>
+          <Table.HeadCell>
+            <span className="sr-only">
+              Edit
+            </span>
+          </Table.HeadCell>
+        </Table.Head>
+        <Table.Body className="divide-y">
           {invoices.map((inv) => {
             return (
-              <tr class="text-sm">
-                <td class="px-2 text-right font-mono">{inv.guestName}</td>
-                <td class="px-2 text-right font-mono">{inv.issuer}</td>
-                <td class="px-2 text-right font-mono">{inv.subTotal.toLocaleString('us-US', { style: 'currency', currency: 'VND' })}</td>
-                <td class="px-2 text-right font-mono">
-                  <Link to={inv.id}>Edit</Link>
-                </td> 
-              </tr>
+              <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                  {inv.guestName}
+                </Table.Cell>
+                <Table.Cell>
+                  {inv.issuer}
+                </Table.Cell>
+                <Table.Cell>
+                  {inv.subTotal}
+                </Table.Cell>
+                <Table.Cell>
+                  <Link to={inv.id} className="font-medium text-blue-600 hover:underline dark:text-blue-500">Edit</Link>
+                </Table.Cell>
+              </Table.Row>
             )
           })}
-        </tbody>
-      </table>
+        </Table.Body>
+      </Table>
     </div >
   );
 }
