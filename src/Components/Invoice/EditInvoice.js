@@ -3,10 +3,10 @@ import { Link, useParams } from "react-router-dom";
 import { getInvoice } from "../../db/invoice";
 import { EditItem } from "./EditItem";
 import UpdateButton from "../Button/Button";
-import { TextInput, Label, Select } from 'flowbite-react';
+import { TextInput, Label } from 'flowbite-react';
 
-import { getIssuers } from "../../db/invoice";
 import { AddItem } from "./AddItem";
+import { SelectIssuer } from "./IssuerSelection";
 
 export const EditInvoice = () => {
   const [invoice, setInvoice] = useState(
@@ -28,7 +28,6 @@ export const EditInvoice = () => {
     }
   )
 
-  const issuers = getIssuers()
   const { invoiceId } = useParams()
 
   useEffect(() => {
@@ -76,14 +75,12 @@ export const EditInvoice = () => {
     setInvoice(inv)
   }
 
-  const onIssuerChange = (e) => {
-    console.log("Selected: %s", e.target.value)
-
-    let iss = issuers.find((i) => i.issuerId === e.target.value)
+  const onIssuerChange = (member) => {
+    console.log("Selected: %s", member.issuerId)
     const inv = {
       ...invoice,
-      issuerId: e.target.value,
-      issuer: iss != null ? iss.issuer : invoice.issuer
+      issuerId: member.issuerId,
+      issuer: member.issuer
     }
 
     setInvoice(inv)
@@ -143,21 +140,9 @@ export const EditInvoice = () => {
             </div>
           </div>
           <div class="flex flex-wrap -mx-3 mb-6">
+            {/* <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" class="h-5 w-5 text-gray-500 dark:text-gray-400" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg></div> */}
             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <svg aria-hidden="true"
-                  class="w-5 h-5 text-gray-500 dark:text-gray-400"
-                  fill="currentColor" viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
-                </svg>
-              </div>
-              <input datepicker="true"
-                type="text"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Select date">
-              </input>
-              {/* <div className="mb-2 block">
+              <div className="mb-2 block">
                 <Label
                   htmlFor="checkInDate"
                   value="Check In"
@@ -171,7 +156,12 @@ export const EditInvoice = () => {
                 readOnly={false}
                 type="date"
                 onChange={onDataChange}
-              /> */}
+                rightIcon={() => {
+                  return (
+                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                  )
+                }}
+              />
             </div>
             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <div className="mb-2 block">
@@ -187,6 +177,11 @@ export const EditInvoice = () => {
                 value={invoice.checkOutDate}
                 readOnly={false}
                 type="date"
+                rightIcon={() => {
+                  return (
+                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                  )
+                }}
               />
             </div>
           </div>
@@ -199,7 +194,9 @@ export const EditInvoice = () => {
                   value="Issuer"
                 />
               </div>
-              <Select
+              <SelectIssuer is={{ issuerId: invoice.issuerId, issuer: invoice.issuer }}
+                fncChangeIssuer={onIssuerChange} />
+              {/* <Select
                 id="issuer"
                 required={true}
                 onChange={onIssuerChange}
@@ -208,13 +205,14 @@ export const EditInvoice = () => {
                 {
                   issuers.map((iss, i) => {
                     return (
-                      <option key={iss.issuerId} value={iss.issuerId}>
+                      <option key={iss.issuerId} value={iss.issuerId}
+                      >
                         {iss.issuer}
                       </option>
                     )
                   })
                 }
-              </Select>
+              </Select> */}
             </div>
             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <div className="mb-2 block">

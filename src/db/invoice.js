@@ -17,9 +17,18 @@ export function getInvoice(invoiceId) {
 }
 
 export function getIssuers() {
-  return [{ issuerId: "1351151927", issuer: "Mẫn Trịnh" },
-  { issuerId: "5114683375", issuer: "Liễu Lê" },
-  { issuerId: "6159537383", issuer: "Hương Thanh" }]
+  return [{
+    issuerId: "1351151927",
+    issuer: "Mẫn Trịnh"
+  },
+  {
+    issuerId: "5114683375",
+    issuer: "Liễu Lê"
+  },
+  {
+    issuerId: "6159537383",
+    issuer: "Hương Thanh"
+  }]
 }
 
 export function getItemList() {
