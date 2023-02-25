@@ -6,7 +6,7 @@ import UpdateButton from "../Button/Button";
 import { TextInput, Label } from 'flowbite-react';
 
 import { AddItem } from "./AddItem";
-import { SelectIssuer } from "./IssuerSelection";
+import { SelectIssuer } from "./SelectIssuer";
 
 export const EditInvoice = () => {
   const [invoice, setInvoice] = useState(

@@ -46,9 +46,10 @@ export const SelectIssuer = ({ is, fncChangeIssuer }) => {
         popup={true}
         onClose={onClose}
       >
-        <Modal.Header />
+        <Modal.Header ><span>Select the issuer</span></Modal.Header>
         <Modal.Body>
           <div className="w-11/12">
+
             <ListGroup>
               {
                 members.map((mem) => {
